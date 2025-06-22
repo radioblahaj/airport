@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "airport-data-js": "^1.0.6"
+    "airport-data-js": "^1.0.6",
+    "chalk": "^5.4.1"
   }
 }
