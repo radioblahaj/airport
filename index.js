@@ -44,16 +44,32 @@ async function getFlightsData(minLat, maxLat, minLon, maxLon) {
             minLon: minLon,
             maxLon: maxLon
         };
-
         const url = `https://opensky-network.org/api/states/all?lamin=${data.minLat}&lomin=${data.minLon}&lamax=${data.maxLat}&lomax=${data.maxLon}`;
         const response = await fetch(url);
         const overhead = await response.json();
-        console.log(overhead);
-        console.log(chalk.red(url));
+        // console.log(overhead);
+        // console.log(chalk.red(url));
     } catch (error) {
         console.error('Error fetching flights data:', error);
     }
 }
+
+async function getFlightRadarURL(callsign) {
+    try {
+        const url = `https://www.flightradar24.com/v1/search/web/find?query=${callsign}`;
+        const response = await fetch(url)
+        const data = await response.json()
+        const flightRadarID = data.results[1].id
+        const flightRadarURL = `https://www.flightradar24.com/${callsign}/${flightRadarID}`;
+        console.log(chalk.green(flightRadarURL));
+        return flightRadarURL;
+    }
+    catch (error) {
+        console.error('Error fetching FlightRadar URL:', error);
+    }
+}
+
+getFlightRadarURL('KLM204')
 
 const { minLat, maxLat, minLon, maxLon } = await getTrackingArea(airportInformation);
 const getData = await getFlightsData(minLat, maxLat, minLon, maxLon);
