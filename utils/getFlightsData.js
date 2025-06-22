@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import getFlightRadarData from './getFlightRadarData.js';
-import { skip } from '@prisma/client/runtime/library';
 
 async function getFlightsData(minLat, maxLat, minLon, maxLon) {
     try {
@@ -35,7 +34,7 @@ async function getFlightsData(minLat, maxLat, minLon, maxLon) {
 
         for (let icao24 in states.icao24) {
             if (states.callsign[icao24] === null) {
-                skip;
+                continue
             }
            getFlightRadarData(states.callsign[icao24])
        
