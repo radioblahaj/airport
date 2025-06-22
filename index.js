@@ -17,12 +17,14 @@ console.log(figlet.textSync('Flight Tracker', {
     whitespaceBreak: true
 }));
 
+
 async function func() {
 	term( 'What IATA Airport do you want to check?' );
 	var input = await term.inputField().promise ;  
     input = input.toLocaleUpperCase();
     return input
 }
+
 
 const airportCode = await func();
 console.log(airportCode)

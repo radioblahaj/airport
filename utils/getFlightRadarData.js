@@ -8,14 +8,16 @@ async function getFlightRadarData(callsign) {
         // console.log(data)
         const flightRadarID = data.results[1].id
         const { ac_type, logo, reg, flight } = data.results[1].detail;
-        console.log(chalk.bgCyanBright(`Aircraft Type: ${ac_type}`));
-        console.log(chalk.bgBlueBright(`Flight Code: ${flight}`));
-        console.log(chalk.bgYellowBright(`Registration: ${reg}`));
-        console.log(chalk.bgGreenBright(`Logo: ${logo}`));
-        console.log(chalk.bgRedBright(`Flight Radar ID: ${flightRadarID}`));
-        console.log(chalk.bgMagentaBright(`Callsign: ${callsign}`));
+        console.log("------ FlightRadar Data ------");
+        console.log(chalk.cyanBright(`Aircraft Type: ${ac_type}`));
+        console.log(chalk.blueBright(`Flight Code: ${flight}`));
+        console.log(chalk.yellowBright(`Registration: ${reg}`));
+        // console.log(chalk.bgGreenBright(`Logo: ${logo}`));
+        console.log(chalk.redBright(`Flight Radar ID: ${flightRadarID}`));
+        console.log(chalk.magentaBright(`Callsign: ${callsign}`));
         const flightRadarURL = `https://www.flightradar24.com/${callsign}/${flightRadarID}`;
-        console.log(chalk.bgWhiteBright(flightRadarURL));
+        console.log(`View in FlightRadar`, chalk.blueBright(flightRadarURL));
+        console.log("-------------------------------");
         return flightRadarURL, ac_type;
     }
     catch (error) {
