@@ -6,6 +6,7 @@ import fetchAirportData from './utils/fetchAirportData.js';
 import getTrackingArea from './utils/getTrackingArea.js';
 import getFlightsData from './utils/getFlightsData.js';
 import getFlightRadarData from './utils/getFlightRadarData.js';
+import printFlightsData from './utils/printFlightData.js';
 
 const { terminal: term } = pkg;
 
@@ -19,8 +20,8 @@ console.log(figlet.textSync('Flight Tracker', {
 
 
 async function func() {
-	term( 'What IATA Airport do you want to check?' );
-	var input = await term.inputField().promise ;  
+    term('What IATA Airport do you want to check?');
+    var input = await term.inputField().promise;
     input = input.toLocaleUpperCase();
     return input
 }
@@ -37,14 +38,15 @@ const { minLat, maxLat, minLon, maxLon } = await getTrackingArea(airportInformat
 
 // Fetch flights data based on the tracking area
 console.log(chalk.bgGreenBright('Fetching Flights Data...'));
-const getData = await getFlightsData(minLat, maxLat, minLon, maxLon);
+
+const getData = await printFlightsData(minLat, maxLat, minLon, maxLon);
 
 // Fetch FlightRadar data for a specific callsign
 console.log(chalk.bgYellowBright('Fetching FlightRadar Data...'));
-const callsign = "KLM204"
-await getFlightRadarData(callsign)
+// const callsign = "KLM204"
+// await getFlightRadarData(callsign)
 
- process.exit();
+process.exit();
 
 
 

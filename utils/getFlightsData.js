@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import getFlightRadarData from './getFlightRadarData.js';
+import printFlightsData from './printFlightData.js';
 
 async function getFlightsData(minLat, maxLat, minLon, maxLon) {
     try {
@@ -31,13 +31,25 @@ async function getFlightsData(minLat, maxLat, minLon, maxLon) {
             spi: overhead.states.map(state => state[15]),
             positionSource: overhead.states.map(state => state[16])
         };
-
-        for (let icao24 in states.icao24) {
-            if (states.callsign[icao24] === null) {
+        for (let record in states) {
+        console.log(states[record])
+        }
+        for (let flight in states.icao24) {
+            console.log(states.icao24[flight])
+            if (states.callsign[flight] === null) {
                 continue
             }
-           getFlightRadarData(states.callsign[icao24])
-       
+            const flightData = states.icao24.map((icao, idx) => ({
+                icao24: icao,
+                callsign: states.callsign[idx],
+                originCountry: states.originCountry[idx],
+                timePosition: states.timePosition[idx],
+                baroAltitude: states.baroAltitude[idx],
+                geoAltitude: states.geoAltitude[idx],
+                velocity: states.velocity[idx],
+            }));
+            // console.log(flightData)
+            return flightData
         }
 
         // console.log(overhead);
@@ -46,4 +58,6 @@ async function getFlightsData(minLat, maxLat, minLon, maxLon) {
         console.error('Error fetching flights data:', error);
     }
 }
-export default getFlightsData;
+
+
+export default getFlightsData

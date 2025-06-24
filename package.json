@@ -1,6 +1,6 @@
 {
   "name": "alaskaflights",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -16,7 +16,10 @@
     "inquirer": "^12.6.3",
     "terminal-kit": "^3.1.2"
   },
-    "bin": {
+  "bin": {
     "alaskaflight": "./cli.js"
+  },
+  "devDependencies": {
+    "jest": "^30.0.2"
   }
 }
