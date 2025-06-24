@@ -14,7 +14,7 @@ async function printFlightsData(minLat, maxLat, minLon, maxLon) {
             flightRadarData = await getFlightRadarData(callsign)
             data.push(flightRadarData)
         }
-        console.log(data.length)
+        // console.log(data.length)
 
 
         //   const states = {
@@ -23,13 +23,22 @@ async function printFlightsData(minLat, maxLat, minLon, maxLon) {
 
         if (data.length > 0) {
             for (let record in data) {
-                console.log(data[record].type)
+             
+                if (!data[record] || !data[record].ac_type || !data[record].flightRadarID) {
+                   console.log(chalk.redBright(`No santaized data found for record: ${record}, callsign: ${callsign}`));
+                    continue;
+                }
+                // console.log(data[record].type)
                 const allFlightData = {
                     type: (data[record] && data[record].type) ? data[record].type : null,
                     ac_type: data[record].ac_type,
                     reg: data[record].reg,
                     route: data[record].route
                 }
+            console.log(chalk.bgGreenBright(`Fetching Flights Data for ${data.length} flights...`));
+
+            console.log(`------ Flight Data for ${record} ------`);
+
             // console.log(chalk.bgWhiteBright(`Origin Country: ${flightData.originCountry}`))
             // console.log(chalk.bgMagentaBright(`Callsign: ${callsign}`));
             // console.log(chalk.bgGreenBright(`Airline Name: ${name}`));

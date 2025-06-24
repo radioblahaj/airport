@@ -32,7 +32,7 @@ async function getFlightsData(minLat, maxLat, minLon, maxLon) {
             positionSource: overhead.states.map(state => state[16])
         };
         for (let record in states) {
-        console.log(states[record])
+        // console.log(states[record])
         }
         for (let flight in states.icao24) {
             console.log(states.icao24[flight])

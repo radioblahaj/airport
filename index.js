@@ -4,13 +4,13 @@ import figlet from 'figlet';
 import pkg from 'terminal-kit';
 import fetchAirportData from './utils/fetchAirportData.js';
 import getTrackingArea from './utils/getTrackingArea.js';
-import getFlightsData from './utils/getFlightsData.js';
-import getFlightRadarData from './utils/getFlightRadarData.js';
+// import getFlightsData from './utils/getFlightsData.js';
+// import getFlightRadarData from './utils/getFlightRadarData.js';
 import printFlightsData from './utils/printFlightData.js';
 
 const { terminal: term } = pkg;
 
-console.log(figlet.textSync('Flight Tracker', {
+console.log(figlet.textSync('Flights Near You', {
     font: 'Standard',
     horizontalLayout: 'default',
     verticalLayout: 'default',
@@ -36,8 +36,8 @@ const airportInformation = await fetchAirportData(airportCode);
 console.log(chalk.bgBlueBright('Tracking Area Information:'));
 const { minLat, maxLat, minLon, maxLon } = await getTrackingArea(airportInformation);
 
-// Fetch flights data based on the tracking area
-console.log(chalk.bgGreenBright('Fetching Flights Data...'));
+// // Fetch flights data based on the tracking area
+// console.log(chalk.bgGreenBright('Fetching Flights Data...'));
 
 const getData = await printFlightsData(minLat, maxLat, minLon, maxLon);
 
